@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+            xmlns:views="clr-namespace:mobile.Views"
+             x:Class="mobile.Views.LoginPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" />
+        <ToolbarItem Text="Save" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">            
+                <Label Text="Prénom" FontSize="Medium" />
+                <Entry Placeholder="Prénom" x:Name="FirstName" FontSize="Small" />
+                <Label Text="Nom" FontSize="Medium" />
+                <Entry Placeholder="Nom" x:Name="LastName" FontSize="Small" />
+                <Label Text="Numéro de téléphone" FontSize="Medium" />
+                <Entry Placeholder="078 564 81 65" x:Name="mobile" FontSize="Small" />
+                <Button Text="S'inscrire" Clicked="Button_Register"/>
+                <Label Text="Token de connexion" FontSize="Medium" />
+                <Entry Placeholder="56w4er-564wer-we456rr-we5r46" x:Name="Token" FontSize="Small" />
+                <Button Text="Se connecter" Clicked="Button_Login"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
