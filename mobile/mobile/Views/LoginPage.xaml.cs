@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mobile.Models;
+using System;
 using System.IO;
 using Xamarin.Forms;
 
@@ -18,9 +19,15 @@ namespace mobile.Views
 
         private void Button_Register(object sender, EventArgs e)
         {
-            Console.WriteLine(FirstName.Text);
-            Console.Error.WriteLine(LastName.Text);
-            Console.WriteLine(mobile.Text);
+            bool isValid = User.CheckInformations(FirstName.Text, LastName.Text, PhoneNumber.Text);
+
+            if(!isValid)
+            {
+                DisplayAlert("Incomplet form", "Please complete all fields", "OK...");
+                return;
+            }
+            User user = new User(FirstName.Text, LastName.Text, PhoneNumber.Text);
+            DisplayAlert("Your user is:", $"Firstname : {user.Firstname}\nLastname : {user.Lastname}\nPhone number : {user.PhoneNumber}", "I confirm", "I cancel...");
         }
 
         private void Button_Login(object sender, EventArgs e)
