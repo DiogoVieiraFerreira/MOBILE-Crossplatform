@@ -8,29 +8,29 @@
              xmlns:views="clr-namespace:mobile.Views"
              x:Class="mobile.Views.LoginPage">
     
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" />
-        <ToolbarItem Text="Save" />
-    </ContentPage.ToolbarItems>
-    
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Spacing="20" Padding="15">            
-                <Label Text="Prénom" FontSize="Medium" />
-                <Entry Placeholder="Prénom" x:Name="FirstName" FontSize="Small" />
-                <Label Text="Nom" FontSize="Medium" />
-                <Entry Placeholder="Nom" x:Name="LastName" FontSize="Small" />
-                <Label Text="Numéro de téléphone" FontSize="Medium" />
-                <Entry Keyboard="Numeric" x:Name="PhoneNumber" Placeholder="078 564 81 65" FontSize="Small">
-                    <Entry.Behaviors>
-                        <behavior:MaskedBehavior Mask="XXX XXX XX XX" />
-                    </Entry.Behaviors>
-                </Entry>
-                <Button Text="S'inscrire" Clicked="Button_Register"/>
-                <Label Text="Token de connexion" FontSize="Medium" />
-                <Entry Placeholder="56w4er-564wer-we456rr-we5r46" x:Name="Token" FontSize="Small" />
-                <Button Text="Se connecter" Clicked="Button_LoginAsync"/>
-            </StackLayout>
-        </ScrollView>
+        <Grid>
+            <ScrollView>
+                <StackLayout Spacing="20" Padding="15">
+                    <Label Text="Prénom" FontSize="Medium" />
+                    <Entry Placeholder="Prénom" x:Name="FirstName" FontSize="Small" />
+                    <Label Text="Nom" FontSize="Medium" />
+                    <Entry Placeholder="Nom" x:Name="LastName" FontSize="Small" />
+                    <Label Text="Numéro de téléphone" FontSize="Medium" />
+                    <Entry Keyboard="Numeric" x:Name="PhoneNumber" Placeholder="078 564 81 65" FontSize="Small">
+                        <Entry.Behaviors>
+                            <behavior:MaskedBehavior Mask="XXX XXX XX XX" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button Text="S'inscrire" Clicked="Button_Register"/>
+                    <Label Text="Token de connexion" FontSize="Medium" />
+                    <Entry Placeholder="56w4er-564wer-we456rr-we5r46" x:Name="Token" FontSize="Small" />
+                    <Button Text="Se connecter" Clicked="Button_LoginAsync"/>
+                </StackLayout>            
+            </ScrollView>
+            <ContentView x:Name="Waitting" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ActivityIndicator IsRunning="true" />
+            </ContentView>        
+    </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -22,6 +22,7 @@ namespace mobile.Views
         public LoginPage()
         {
             InitializeComponent();
+
             if (File.Exists(_fileName))
             {
                 string token = File.ReadAllText(_fileName);
@@ -33,35 +34,53 @@ namespace mobile.Views
             uri = new Uri(url);
         }
 
-        private void Button_Register(object sender, EventArgs e)
+        private async void Button_Register(object sender, EventArgs e)
         {
+            Waitting.IsVisible = true;
             bool isValid = User.CheckInformations(FirstName.Text, LastName.Text, PhoneNumber.Text);
 
             if (!isValid)
             {
-                DisplayAlert("Incomplet form", "Please complete all fields", "OK...");
+                await DisplayAlert("Incomplet form", "Please complete all fields", "OK...");
+
+                Waitting.IsVisible = false;
                 return;
             }
             User user = new User(FirstName.Text, LastName.Text)
             {
                 PhoneNumber = PhoneNumber.Text
             };
-
-            _ = SignUp(user); //to put the result to trash 
+            try
+            {
+                HttpResponseMessage response = await SignUp(user);
+                if (response.IsSuccessStatusCode)
+                    await DisplayAlert("Inscription complète", "Un opérateur du système vous enverra votre code d'accès par l'intermédiare d'un SMS", "Cool Merci", "Ah ok...");
+                else
+                    await DisplayAlert("Inscription échouée", "Veuillez ressayer plus tard...\nSi le problème persiste, cela signifie que votre numéro de téléphone a déjà été utilisé.\nVeuillez contacter le support.", "OK");
+            }
+            catch
+            {
+                await DisplayAlert("Inscription échouée", "Veuillez ressayer plus tard...\nSi le problème persiste, cela signifie que votre numéro de téléphone a déjà été utilisé.\nVeuillez contacter le support.", "OK");
+            }
+            Waitting.IsVisible = false;
         }
 
         private async void Button_LoginAsync(object sender, EventArgs e)
         {
+            Waitting.IsVisible = true;
             User user = await SignIn(Token.Text);
-            if(user == null)
+            if (user == null)
             {
                 await DisplayAlert("Connexion échounée", "Veuillez re-saisir votre token.\nSi le problème persiste, merci de contacter le support.", "OK...");
+
+                Waitting.IsVisible = false;
                 return;
             }
             File.WriteAllText(_fileName, Token.Text);
+            Application.Current.MainPage = new MainPage();
         }
 
-        private async Task SignUp(User user)
+        private async Task<HttpResponseMessage> SignUp(User user)
         {
             var client = new HttpClient();
             var jsonRequest = new { firstname = user.Firstname, lastname = user.Lastname, phonenumber = user.PhoneNumber };
@@ -72,14 +91,11 @@ namespace mobile.Views
             client.BaseAddress = uri;
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            
-            HttpResponseMessage response = await client.PostAsync("/api/user/apply", content);
-            if (response.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Inscription complète", "Un opérateur du système vous enverra votre code d'accès par l'intermédiare d'un SMS", "Cool Merci", "Ah ok...");
-                return;
-            }
-            await DisplayAlert("Inscription échouée", "Veuillez ressayer plus tard...\nSi le problème persiste, cela signifie que votre numéro de téléphone a déjà été utilisé.\nVeuillez contacter le support.", "OK");
+
+            HttpResponseMessage response = null;
+            response = await client.PostAsync("/api/user/apply", content);
+
+            return response;
         }
 
         private async Task<User> SignIn(string token)
