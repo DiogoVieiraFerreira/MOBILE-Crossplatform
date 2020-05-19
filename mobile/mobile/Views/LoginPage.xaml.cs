@@ -69,7 +69,7 @@ namespace mobile.Views
         {
             Waitting.IsVisible = true;
             User user = await SignIn(Token.Text);
-            if(user == null)
+            if (user == null)
             {
                 await DisplayAlert("Connexion échounée", "Veuillez re-saisir votre token.\nSi le problème persiste, merci de contacter le support.", "OK...");
 
@@ -77,7 +77,7 @@ namespace mobile.Views
                 return;
             }
             File.WriteAllText(_fileName, Token.Text);
-            Waitting.IsVisible = false;
+            Application.Current.MainPage = new MainPage();
         }
 
         private async Task<HttpResponseMessage> SignUp(User user)
