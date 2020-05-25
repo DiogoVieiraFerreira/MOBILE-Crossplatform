@@ -24,7 +24,7 @@
                     </Entry>
                     <Button Text="S'inscrire" Clicked="Button_Register"/>
                     <Label Text="Token de connexion" FontSize="Medium" />
-                    <Entry Placeholder="56w4er-564wer-we456rr-we5r46" x:Name="Token" FontSize="Small" />
+                    <Entry Placeholder="56w4er-564wer-we456rr-we5r46" x:Name="TokenField" FontSize="Small" />
                     <Button Text="Se connecter" Clicked="Button_LoginAsync"/>
                 </StackLayout>            
             </ScrollView>

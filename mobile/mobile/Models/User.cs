@@ -4,13 +4,13 @@ using System.Text;
 
 namespace mobile.Models
 {
-    class User
+    public class User
     {
         public int ID { get; set; }
         public string Firstname { get; protected set; }
         public string Lastname { get; protected set; }
         public string PhoneNumber{ get; set; }
-        public string Token { get; protected set; }
+        public string Token { get; set; }
         public User(string token)
         {
             this.Token = token;
