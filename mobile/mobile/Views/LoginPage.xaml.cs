@@ -23,15 +23,20 @@ namespace mobile.Views
         {
             InitializeComponent();
 
+            server = "192.168.1.103";
+            url = string.Format(@"http://{0}/", server);
+            uri = new Uri(url);
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             if (File.Exists(_fileName))
             {
                 string token = File.ReadAllText(_fileName);
                 Token.Text = token;
+                Button_LoginAsync(this, new EventArgs());
             }
-
-            server = "192.168.1.103";
-            url = string.Format(@"http://{0}/", server);
-            uri = new Uri(url);
         }
 
         private async void Button_Register(object sender, EventArgs e)
@@ -68,16 +73,24 @@ namespace mobile.Views
         private async void Button_LoginAsync(object sender, EventArgs e)
         {
             Waitting.IsVisible = true;
-            User user = await SignIn(Token.Text);
-            if (user == null)
+            try
             {
-                await DisplayAlert("Connexion échounée", "Veuillez re-saisir votre token.\nSi le problème persiste, merci de contacter le support.", "OK...");
+                User user = await SignIn(Token.Text);
+                if (user == null)
+                {
+                    await DisplayAlert("Connexion échouée", "Veuillez re-saisir votre token.\nSi le problème persiste, merci de contacter le support.", "OK...");
 
-                Waitting.IsVisible = false;
-                return;
+                    Waitting.IsVisible = false;
+                    return;
+                }
+                File.WriteAllText(_fileName, Token.Text);
+                Application.Current.Properties["user"] = user;
+                Application.Current.MainPage = new MainPage();
             }
-            File.WriteAllText(_fileName, Token.Text);
-            Application.Current.MainPage = new MainPage();
+            catch
+            {
+                await DisplayAlert("Connexion échouée", "Veuillez ressayer plus tard...\nSi le problème persiste, cela signifie que le serveur distant est momentanaiment inatteignable.", "OK");
+            }
         }
 
         private async Task<HttpResponseMessage> SignUp(User user)
@@ -116,7 +129,8 @@ namespace mobile.Views
 
                 user = new User(userJson["firstname"].ToString(), userJson["lastname"].ToString())
                 {
-                    ID = int.Parse(userJson["id"].ToString())
+                    ID = int.Parse(userJson["id"].ToString()),
+                    Token = Token.Text
                 };
 
             }

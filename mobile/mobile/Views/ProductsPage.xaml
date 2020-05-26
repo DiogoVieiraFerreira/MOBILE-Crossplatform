@@ -5,12 +5,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="mobile.Views.ProductsPage"
-             x:Title="{Binding Title}">
+             Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <ListView x:Name="Products"
+                    BackgroundColor="White"
+                    VerticalOptions="FillAndExpand"
+                    HasUnevenRows="true"
+                    SeparatorVisibility="None"
+                    CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
+                                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0">
+                                        <BoxView Color="Blue" WidthRequest="4" Margin="0" />
+                                        <Grid VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0" VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" FontSize="Medium" Text="{Binding Name}"  Margin="0" />
+                                                <Image Grid.Row="2" Source="{Binding Picture, StringFormat='http://192.168.1.103/storage/pictures/{0}'}"/>
+                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Start">
+                                                    <Label FontSize="Large" Text="💰"/>
+                                                    <Label VerticalOptions="Center" Text="{Binding Price, StringFormat='CHF {0}'}"/>
+                                                    <Label VerticalOptions="Center" Text="{Binding Unit, StringFormat='/ {0}'}"/>
+                                                </StackLayout> 
+                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="End">
+                                                    <Label FontSize="Large" Text="📦"/>
+                                                    <Label VerticalOptions="Center" Text="{Binding Stock}"/>
+                                                </StackLayout>                                                
+                                            </Grid>
+                                            <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"  Margin="-6,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#F1F1F1">
+                                                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Details}"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>                       
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout> 
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
