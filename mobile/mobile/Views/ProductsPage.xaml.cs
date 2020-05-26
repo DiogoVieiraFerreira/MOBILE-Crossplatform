@@ -21,6 +21,7 @@ namespace mobile.Views
         public string Url { get; protected set; }
         Uri uri;
         User user;
+        List<Product> products;
         public ProductsPage()
         {
             InitializeComponent();
@@ -35,9 +36,9 @@ namespace mobile.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            List<Product> p = await GetProductsAsync(user.Token);
+            products = await GetProductsAsync(user.Token);
             
-            Products.ItemsSource = p;
+            Products.ItemsSource = products.Where(product => product.Current);
         }
 
         private async Task<List<Product>> GetProductsAsync(string token)

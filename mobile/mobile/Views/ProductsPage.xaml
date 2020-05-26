@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:mobile.ViewModels"
              mc:Ignorable="d"
              x:Class="mobile.Views.ProductsPage"
              Title="{Binding Title}">
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -15,12 +17,12 @@
                     HasUnevenRows="true"
                     SeparatorVisibility="None"
                     CachingStrategy="RecycleElement">
-                    <ListView.ItemTemplate>
+                    <ListView.ItemTemplate >
                         <DataTemplate>
                             <ViewCell>
-                                <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
+                                <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0" >
                                     <StackLayout Orientation="Horizontal" Margin="0" Padding="0">
-                                        <BoxView Color="Blue" WidthRequest="4" Margin="0" />
+                                        <BoxView Color="Green" WidthRequest="10" Margin="0" />
                                         <Grid VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" BackgroundColor="White">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -34,12 +36,12 @@
                                                 </Grid.RowDefinitions>
                                                 <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" FontSize="Medium" Text="{Binding Name}"  Margin="0" />
                                                 <Image Grid.Row="2" Source="{Binding Picture, StringFormat='http://192.168.1.103/storage/pictures/{0}'}"/>
-                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Start">
+                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Start" Margin="10,0,0,0">
                                                     <Label FontSize="Large" Text="💰"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Price, StringFormat='CHF {0}'}"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Unit, StringFormat='/ {0}'}"/>
-                                                </StackLayout> 
-                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="End">
+                                                </StackLayout>
+                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="End" Margin="0,0,20,0" >
                                                     <Label FontSize="Large" Text="📦"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Stock}"/>
                                                 </StackLayout>                                                
