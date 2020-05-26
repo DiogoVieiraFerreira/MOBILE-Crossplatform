@@ -16,7 +16,8 @@
                     VerticalOptions="FillAndExpand"
                     HasUnevenRows="true"
                     SeparatorVisibility="None"
-                    CachingStrategy="RecycleElement">
+                    CachingStrategy="RecycleElement"
+                    ItemSelected="OnItemSelected">
                     <ListView.ItemTemplate >
                         <DataTemplate>
                             <ViewCell>

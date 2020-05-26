@@ -1,4 +1,5 @@
 ﻿using mobile.Models;
+using mobile.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -60,6 +61,17 @@ namespace mobile.Views
             }
 
             return products;
+        }
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var product = args.SelectedItem as Product;
+            if (product == null)
+                return;
+
+            await Navigation.PushAsync(new ProductDetailPage(new ProductDetailViewModel(product)));
+
+            // Manually deselect item.
+            Products.SelectedItem = null;
         }
     }
 }
