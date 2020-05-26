@@ -33,15 +33,21 @@
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
-                                                <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" FontSize="Medium" Text="{Binding Name}"  Margin="0" />
-                                                <Image Grid.Row="2" Source="{Binding Picture, StringFormat='http://192.168.1.103/storage/pictures/{0}'}"/>
-                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Start" Margin="10,0,0,0">
+                                                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Start" Margin="0,0,20,0" >
+                                                    <Label FontSize="Medium" Text="🗓"/>
+                                                    <Label VerticalOptions="Center" FontSize="Micro" Text="{Binding UpdatedAt}"/>
+                                                </StackLayout>
+                                                <Label Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" FontSize="Medium" Text="{Binding Name}"  Margin="0" />
+                                                <Image Grid.Row="3" Source="{Binding Picture, StringFormat='http://192.168.1.103/storage/pictures/{0}'}"/>
+                                                <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="Start" Margin="10,0,0,0">
                                                     <Label FontSize="Large" Text="💰"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Price, StringFormat='CHF {0}'}"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Unit, StringFormat='/ {0}'}"/>
                                                 </StackLayout>
-                                                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="End" Margin="0,0,20,0" >
+                                                <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="End" Margin="0,0,20,0" >
                                                     <Label FontSize="Large" Text="📦"/>
                                                     <Label VerticalOptions="Center" Text="{Binding Stock}"/>
                                                 </StackLayout>                                                
