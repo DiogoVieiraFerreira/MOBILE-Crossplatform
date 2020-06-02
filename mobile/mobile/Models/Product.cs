@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Org.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +30,12 @@ namespace mobile.Models
         [JsonProperty(PropertyName = "updated_at")]
         public DateTime UpdatedAt { get; set; }
         [JsonProperty(PropertyName = "suppliers")]
-        public object Suppliers { get; set; }// TODO : method to deserialize json array and get informations with api
+        private JArray JArraySuppliers { get; set; }
 
+        public List<Supplier> Suppliers 
+        {
+            get => Supplier.Suppliers(JArraySuppliers);
+        }
+        
     }
 }

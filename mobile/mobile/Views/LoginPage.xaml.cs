@@ -90,6 +90,7 @@ namespace mobile.Views
             catch
             {
                 await DisplayAlert("Connexion échouée", "Veuillez ressayer plus tard...\nSi le problème persiste, cela signifie que le serveur distant est momentanaiment inatteignable.", "OK");
+                Waitting.IsVisible = false;
             }
         }
 

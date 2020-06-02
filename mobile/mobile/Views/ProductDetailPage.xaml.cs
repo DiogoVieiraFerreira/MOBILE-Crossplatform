@@ -18,7 +18,8 @@ namespace mobile.Views
         public ProductDetailPage(ProductDetailViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext  = this.viewModel = viewModel;
+            BindingContext = this.viewModel = viewModel;
+            this.Suppliers.ItemsSource = this.viewModel.Product.Suppliers;
         }
         public ProductDetailPage()
         {

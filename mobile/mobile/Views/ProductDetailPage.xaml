@@ -7,11 +7,37 @@
              x:Class="mobile.Views.ProductDetailPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Text:" FontSize="Medium" />
-            <Label Text="{Binding Product.Name}" FontSize="Small"/>
-            <Label Text="Description:" FontSize="Medium" />
-            <Label Text="{Binding Product.Detail}" FontSize="Small"/>
-        </StackLayout>
+        <Grid VerticalOptions="FillAndExpand" Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="{Binding Product.Picture, StringFormat='http://192.168.1.103/storage/pictures/{0}'}"/>
+            <ScrollView Grid.Row="1" >
+                <StackLayout Spacing="20" Padding="15">
+                    <Label FontAttributes="Bold" Text="Informations:" FontSize="Medium"/>
+                    <Label Text="{Binding Product.Details}" FontSize="Medium"/>
+
+                    <Label FontAttributes="Bold" Text="Fournisseurs:" FontSize="Medium"/>
+
+                    <ListView x:Name="Suppliers"
+                    BackgroundColor="White"
+                    SeparatorVisibility="None">
+                        <ListView.ItemTemplate >
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Id}"/>
+                                        <Label Text="{Binding City}"/>
+                                        <Label Text="{Binding CompanyName}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
