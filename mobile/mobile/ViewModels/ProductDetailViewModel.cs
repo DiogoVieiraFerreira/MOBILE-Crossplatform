@@ -1,8 +1,4 @@
-﻿using Android.Icu.Lang;
-using mobile.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using mobile.Models;
 
 namespace mobile.ViewModels
 {

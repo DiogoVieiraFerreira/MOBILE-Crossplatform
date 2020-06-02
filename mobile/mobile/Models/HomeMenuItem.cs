@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace mobile.Models
+﻿namespace mobile.Models
 {
     public enum MenuItemType
     {

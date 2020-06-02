@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Org.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace mobile.Models
 {
