@@ -1,4 +1,5 @@
 ﻿using mobile.Models;
+using mobile.Resources;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,18 +14,10 @@ namespace mobile.Views
 {
     public partial class LoginPage : ContentPage
     {
-        private string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "token");
-        string server;
-        string url;
-        Uri uri;
+        private string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "token");        
         public LoginPage()
         {
             InitializeComponent();
-
-            server = "192.168.1.103";
-            url = string.Format(@"http://{0}/", server);
-            uri = new Uri(url);
-
         }
         protected override void OnAppearing()
         {
@@ -100,7 +93,7 @@ namespace mobile.Views
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
-            client.BaseAddress = uri;
+            client.BaseAddress = API.uri;
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -115,7 +108,7 @@ namespace mobile.Views
             var client = new HttpClient();
             User user = null;
 
-            client.BaseAddress = uri;
+            client.BaseAddress = API.uri;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("/api/me");

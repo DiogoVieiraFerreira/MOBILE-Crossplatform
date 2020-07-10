@@ -11,6 +11,7 @@
         {
             this.Token = token;
         }
+
         public User(string firstname, string lastname)
         {
             this.Firstname = firstname;

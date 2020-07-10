@@ -22,13 +22,13 @@
                     <Label FontAttributes="Bold" Text="Fournisseurs:" FontSize="Medium"/>
 
                     <ListView x:Name="Suppliers"
-                    BackgroundColor="White"
-                    SeparatorVisibility="None">
+                    SeparatorVisibility="Default"  
+                    SeparatorColor="Black"
+                    HeightRequest="100">
                         <ListView.ItemTemplate >
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout>
-                                        <Label Text="{Binding Id}"/>
                                         <Label Text="{Binding City}"/>
                                         <Label Text="{Binding CompanyName}"/>
                                     </StackLayout>

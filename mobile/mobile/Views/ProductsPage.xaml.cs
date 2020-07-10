@@ -1,4 +1,5 @@
 ﻿using mobile.Models;
+using mobile.Resources;
 using mobile.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,18 +17,11 @@ namespace mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductsPage : ContentPage
     {
-        string server;
-        public string Url { get; protected set; }
-        Uri uri;
         User user;
         List<Product> products;
         public ProductsPage()
         {
             InitializeComponent();
-
-            server = "192.168.1.103";
-            Url = string.Format(@"http://{0}/", server);
-            uri = new Uri(Url);
 
             Title = "Liste d'articles";
             user = (User)Application.Current.Properties["user"];            
@@ -45,7 +39,7 @@ namespace mobile.Views
             var client = new HttpClient();
             List<Product> products = null;
 
-            client.BaseAddress = uri;
+            client.BaseAddress = API.uri;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("/api/products");
